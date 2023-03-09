@@ -1,4 +1,4 @@
-export const PostItem = (props: any) => {
+export const PostItem = (props:any) => {
   return (
     <div
       key={props.post.id}
@@ -7,7 +7,7 @@ export const PostItem = (props: any) => {
       <div className="card w-96 bg-base-300 shadow-xl">
         <div className="card-body w-full">
           <div className="grid place-items-end">
-            <button onClick={() => props.remove(props.post)}>
+            <button className="btn" onClick={() => props.remove(props.post)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
