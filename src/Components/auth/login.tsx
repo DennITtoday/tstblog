@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const Login = () => {
   return (
-    <div className=" flex flex-col justify-center items-center text-center w-full content-center pt-52   ">
+    <div className=" grid place-items-center mt-24 ">
       <div className="p-8 rounded-lg max-w-2xl w-auto shadow-2xl max-h-2x bg-base-200">
         <LoginHeader />
         <LoginForm />
