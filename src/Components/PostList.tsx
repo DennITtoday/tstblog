@@ -1,4 +1,3 @@
-/* eslint-disable array-callback-return */
 import { useEffect, useState } from 'react'
 import { PostItem } from './PostItem'
 import axios from 'axios'
