@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react'
 
 const Login = () => {
   return (
@@ -8,8 +8,8 @@ const Login = () => {
         <LoginForm />
       </div>
     </div>
-  );
-};
+  )
+}
 
 const LoginHeader = () => {
   return (
@@ -18,12 +18,12 @@ const LoginHeader = () => {
         Вход в аккаунт
       </text>
     </div>
-  );
-};
+  )
+}
 
 const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   return (
     <div className="pt-4">
       <form>
@@ -58,6 +58,6 @@ const LoginForm = () => {
         </div>
       </form>
     </div>
-  );
-};
-export default Login;
+  )
+}
+export default Login

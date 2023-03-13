@@ -1,4 +1,4 @@
-export const PostItem = (props:any) => {
+export const PostItem = (props: any) => {
   return (
     <div
       key={props.post.id}

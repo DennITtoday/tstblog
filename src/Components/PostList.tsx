@@ -11,12 +11,12 @@ const PostList = () => {
 
   const [posts, setPosts] = useState<IPost[]>([])
   const [sortOptions, setSortOptions] = useState<ISortOption[]>([
-    { id: 2, title: 'By title ascending', sortField: 'title' },
-    { id: 1, title: 'By title descending', sortField: 'title' },
     { id: 0, title: 'not selected', sortField: 'null' },
+    { id: 1, title: 'By title descending', sortField: 'title' },
+    { id: 2, title: 'By title ascending', sortField: 'title' },
   ])
   const [currentOption, setCurrentOption] = useState<ISortOption>(
-    sortOptions[2],
+    sortOptions[0],
   )
   async function fetchPosts() {
     const { data } = await axios.get<IPost[]>(
