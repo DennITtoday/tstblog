@@ -3,12 +3,14 @@ import { PostItem } from './PostItem'
 import axios from 'axios'
 import { SortSelector } from './SortSelector'
 import { IPost, ISortOption } from '../utils/types/Post'
+import PostService from '../APi/PostService'
+import { getPageCount, getPagesArray } from '../utils/Pages'
 
 const PostList = () => {
   useEffect(() => {
     fetchPosts()
   }, [])
-
+  const [isLoading, setIsLoading] = useState(false)
   const [posts, setPosts] = useState<IPost[]>([])
   const [sortOptions, setSortOptions] = useState<ISortOption[]>([
     { id: 0, title: 'not selected', sortField: 'null' },
@@ -18,12 +20,18 @@ const PostList = () => {
   const [currentOption, setCurrentOption] = useState<ISortOption>(
     sortOptions[0],
   )
-  const [searchQuery, setSearchQuery] = useState('')
+  const [limit, setLimit] = useState(10)
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(0)
+  let pagesArray = getPagesArray(totalPages)
+
   async function fetchPosts() {
-    const { data } = await axios.get<IPost[]>(
-      'https://jsonplaceholder.typicode.com/posts',
-    )
-    setPosts((prev) => data)
+    setIsLoading(true)
+    const response = await PostService.getAll(limit, page)
+    setPosts(response.data)
+    const totalCount = response.headers['x-total-count']
+    setTotalPages(getPageCount(totalCount, limit))
+    setIsLoading(false)
   }
   const removePost = (post: any) => {
     setPosts(posts.filter((p) => p.id !== post.id))
@@ -42,7 +50,6 @@ const PostList = () => {
   }
   return (
     <>
-      
       <SortSelector
         options={sortOptions}
         currentOption={currentOption}
@@ -52,9 +59,22 @@ const PostList = () => {
       />
       {posts.length !== 0 ? (
         <div>
-          {posts.map((post: { id: any }) => (
-            <PostItem remove={removePost} key={post.id} post={post} />
-          ))}
+          {isLoading ? (
+            <h1>Loading...</h1>
+          ) : (
+            <div>
+              {posts.map((post: { id: any }) => (
+                <PostItem remove={removePost} key={post.id} post={post} />
+              ))}
+              <div>
+                {pagesArray.map((p: any) => (
+                  <div className="btn-group">
+                    <button className="btn m-2">{p}</button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       ) : (
         <div className="grid place-items-center mt-4 text-9xl">
