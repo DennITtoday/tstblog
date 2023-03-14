@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-
+import PostCreation from './PostCreation'
 
 const Navbar = () => {
   return (
@@ -27,12 +27,16 @@ const Navbar = () => {
           Зарегестрироваться
         </button>
       </Link>
-
-      <Link to="/PostCreation">
-        <button className="btn m-2 sm:btn-sm md:btn-md lg:btn-lg">
-          Создать пост
-        </button>
-      </Link>
+      <label
+        htmlFor="my-modal-4"
+        className="btn m-2 sm:btn-sm md:btn-md lg:btn-lg"
+      >
+        Создать пост
+      </label>
+      <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+      <label htmlFor="my-modal-4" className="modal cursor-pointer">
+        <PostCreation />
+      </label>
 
       <Link to="/About">
         <button className="btn m-2 sm:btn-sm md:btn-md lg:btn-lg">
