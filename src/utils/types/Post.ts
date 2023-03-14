@@ -1,5 +1,8 @@
 
 export interface IPost {
+    map(arg0: (post: { id: any }) => JSX.Element): import("react").ReactNode
+    length: number
+    remove(sortedPost: any): void
     id: string
     title: string
     body: string

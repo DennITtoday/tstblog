@@ -53,7 +53,9 @@ const LoginForm = () => {
         </div>
         <div className="pt-4">
           <button className="btn rounded-xl btn-xs sm:btn-sm md:btn-md w-full">
-            Войти
+            <label htmlFor="my-modal-6">
+              Войти
+            </label>
           </button>
         </div>
       </form>

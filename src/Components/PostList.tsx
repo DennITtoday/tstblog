@@ -18,6 +18,7 @@ const PostList = () => {
   const [currentOption, setCurrentOption] = useState<ISortOption>(
     sortOptions[0],
   )
+  const [searchQuery, setSearchQuery] = useState('')
   async function fetchPosts() {
     const { data } = await axios.get<IPost[]>(
       'https://jsonplaceholder.typicode.com/posts',
@@ -41,6 +42,7 @@ const PostList = () => {
   }
   return (
     <>
+      
       <SortSelector
         options={sortOptions}
         currentOption={currentOption}

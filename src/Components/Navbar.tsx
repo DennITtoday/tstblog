@@ -28,6 +28,12 @@ const Navbar = () => {
         </button>
       </Link>
 
+      <Link to="/PostCreation">
+        <button className="btn m-2 sm:btn-sm md:btn-md lg:btn-lg">
+          Создать пост
+        </button>
+      </Link>
+
       <Link to="/About">
         <button className="btn m-2 sm:btn-sm md:btn-md lg:btn-lg">
           Об авторе
