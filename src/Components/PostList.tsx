@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { PostItem } from './PostItem'
-import axios from 'axios'
 import { SortSelector } from './SortSelector'
 import { IPost, ISortOption } from '../utils/types/Post'
 import PostService from '../APi/PostService'
@@ -8,7 +7,7 @@ import { getPageCount, getPagesArray } from '../utils/Pages'
 
 const PostList = () => {
   useEffect(() => {
-    fetchPosts()
+    fetchPosts(limit, page)
   }, [])
   const [isLoading, setIsLoading] = useState(false)
   const [posts, setPosts] = useState<IPost[]>([])
@@ -25,7 +24,7 @@ const PostList = () => {
   const [totalPages, setTotalPages] = useState(0)
   let pagesArray = getPagesArray(totalPages)
 
-  async function fetchPosts() {
+  async function fetchPosts(limit:number, page:number) {
     setIsLoading(true)
     const response = await PostService.getAll(limit, page)
     setPosts(response.data)
@@ -45,8 +44,12 @@ const PostList = () => {
       sorted = [...posts].sort((a, b) => b.title.localeCompare(a.title))
       setPosts((prev) => [...sorted])
     } else if (currentOption.id === 0) {
-      await fetchPosts()
+      await fetchPosts(limit,page)
     }
+  }
+  const changePage = (page:any) => {
+    setPage(page)
+    fetchPosts(limit,page)
   }
   return (
     <>
@@ -66,10 +69,16 @@ const PostList = () => {
               {posts.map((post: { id: any }) => (
                 <PostItem remove={removePost} key={post.id} post={post} />
               ))}
-              <div>
+              <div className='flex justify-center'>
                 {pagesArray.map((p: any) => (
-                  <div className="btn-group">
-                    <button className="btn m-2">{p}</button>
+                  <div className="btn-group m-2 ">
+                    <button
+                      key={p}
+                      onClick={() => changePage(p)}
+                      className={page === p ? 'btn btn-active' : 'btn'}
+                    >
+                      {p}
+                    </button>
                   </div>
                 ))}
               </div>
