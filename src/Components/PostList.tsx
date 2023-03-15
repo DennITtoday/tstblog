@@ -24,7 +24,7 @@ const PostList = () => {
   const [totalPages, setTotalPages] = useState(0)
   let pagesArray = getPagesArray(totalPages)
 
-  async function fetchPosts(limit:number, page:number) {
+  async function fetchPosts(limit: number, page: number) {
     setIsLoading(true)
     const response = await PostService.getAll(limit, page)
     setPosts(response.data)
@@ -44,12 +44,12 @@ const PostList = () => {
       sorted = [...posts].sort((a, b) => b.title.localeCompare(a.title))
       setPosts((prev) => [...sorted])
     } else if (currentOption.id === 0) {
-      await fetchPosts(limit,page)
+      await fetchPosts(limit, page)
     }
   }
-  const changePage = (page:any) => {
+  const changePage = (page: any) => {
     setPage(page)
-    fetchPosts(limit,page)
+    fetchPosts(limit, page)
   }
   return (
     <>
@@ -69,7 +69,7 @@ const PostList = () => {
               {posts.map((post: { id: any }) => (
                 <PostItem remove={removePost} key={post.id} post={post} />
               ))}
-              <div className='flex justify-center'>
+              <div className="flex justify-center">
                 {pagesArray.map((p: any) => (
                   <div className="btn-group m-2 ">
                     <button

@@ -1,4 +1,6 @@
+import { useNavigate } from 'react-router-dom'
 export const PostItem = (props: any) => {
+  const router = useNavigate()
   return (
     <div
       key={props.post.id}
@@ -27,8 +29,11 @@ export const PostItem = (props: any) => {
           <h2 className="card-title font-bold">{props.post.title}</h2>
           <p>{props.post.body}</p>
         </div>
-        <button className="btn gap-2">
-          Do you like it?
+        <button
+          className="btn gap-2"
+          onClick={() => router(`/posts/${props.post.id}`)}
+        >
+          Open post
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
